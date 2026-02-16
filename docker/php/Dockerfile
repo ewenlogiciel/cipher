@@ -41,4 +41,4 @@ RUN mkdir -p var && chown -R www-data:www-data var/
 
 EXPOSE 8000
 
-CMD ["symfony", "server:start", "--no-tls", "--port=8000", "--allow-all-ip"]
+CMD ["symfony", "local:server:start", "--no-tls", "--port=8000", "--allow-all-ip"]
