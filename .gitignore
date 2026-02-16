@@ -18,3 +18,7 @@ database_data/
 .vscode/
 *.swp
 *.swo
+
+# Claude Code
+CLAUDE.md
+.claude/
