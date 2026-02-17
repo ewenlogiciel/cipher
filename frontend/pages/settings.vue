@@ -4,6 +4,9 @@ import QRCode from 'qrcode'
 
 const api = useApi()
 const { user } = useAuth()
+
+const { set: setBreadcrumb } = useBreadcrumb()
+setBreadcrumb([{ label: 'Paramètres' }])
 const qrCodeDataUrl = ref('')
 
 const twoFactorEnabled = ref(user.value?.['2fa_enabled'] ?? false)
