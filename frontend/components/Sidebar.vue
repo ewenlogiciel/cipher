@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  Home,
   Shield,
   Vault,
   Activity,
@@ -7,14 +8,18 @@ import {
   LogOut,
   ChevronLeft,
   User,
+  UserCog,
 } from 'lucide-vue-next'
 
 const route = useRoute()
 const { collapsed, toggle } = useSidebar()
 const { user, logout } = useAuth()
 
+const userEmail = computed(() => user.value?.email ?? '')
+
 const navigation = [
-  { name: 'Coffres', icon: Vault, path: '/' },
+  { name: 'Accueil', icon: Home, path: '/' },
+  { name: 'Coffres', icon: Vault, path: '/vaults' },
   { name: 'Activité', icon: Activity, path: '/activity' },
   { name: 'Paramètres', icon: Settings, path: '/settings' },
 ]
@@ -23,6 +28,22 @@ function isActive(path: string): boolean {
   if (path === '/') return route.path === '/'
   return route.path.startsWith(path)
 }
+
+const showUserMenu = ref(false)
+const userMenuRef = ref<HTMLElement | null>(null)
+
+function toggleUserMenu() {
+  showUserMenu.value = !showUserMenu.value
+}
+
+function handleClickOutside(e: MouseEvent) {
+  if (userMenuRef.value && !userMenuRef.value.contains(e.target as Node)) {
+    showUserMenu.value = false
+  }
+}
+
+onMounted(() => document.addEventListener('click', handleClickOutside))
+onUnmounted(() => document.removeEventListener('click', handleClickOutside))
 </script>
 
 <template>
@@ -32,12 +53,9 @@ function isActive(path: string): boolean {
   >
     <!-- Logo -->
     <div class="flex h-14 items-center gap-3 border-b border-white/[0.06] px-4">
-      <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/10">
-        <Shield class="h-4 w-4 text-accent" />
-      </div>
       <span
         v-show="!collapsed"
-        class="text-[15px] font-semibold tracking-tight text-zinc-100"
+        class="text-[20px] font-semibold tracking-tight text-zinc-100"
       >
         Cipher
       </span>
@@ -79,22 +97,47 @@ function isActive(path: string): boolean {
         <span v-show="!collapsed">Réduire</span>
       </button>
 
-      <!-- User -->
-      <div
-        class="flex items-center gap-3 rounded-lg px-3 py-2"
-      >
-        <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-200">
-          <User class="h-3.5 w-3.5 text-muted" />
-        </div>
-        <div v-show="!collapsed" class="flex-1 min-w-0">
-          <p class="truncate text-sm font-medium text-zinc-300">{{ user?.email }}</p>
-        </div>
-        <button
-          v-show="!collapsed"
-          @click="logout()"
-          class="shrink-0 rounded-md p-1 text-muted transition-colors hover:bg-white/[0.06] hover:text-zinc-300"
+      <!-- User with popover -->
+      <div ref="userMenuRef" class="relative">
+        <!-- Popover -->
+        <Transition
+          enter-active-class="transition duration-150 ease-out"
+          enter-from-class="opacity-0 translate-y-1"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transition duration-100 ease-in"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 translate-y-1"
         >
-          <LogOut class="h-3.5 w-3.5" />
+          <div
+            v-if="showUserMenu"
+            class="absolute bottom-full left-0 mb-2 w-52 rounded-xl border border-white/[0.06] bg-surface-50 p-1.5 shadow-xl"
+          >
+            <NuxtLink
+              to="/profile"
+              @click="showUserMenu = false"
+              class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-zinc-300 transition-colors hover:bg-white/[0.06] hover:text-zinc-100"
+            >
+              <UserCog class="h-4 w-4 text-muted" />
+              Profil
+            </NuxtLink>
+            <button
+              @click="logout()"
+              class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-red-400 transition-colors hover:bg-red-500/10"
+            >
+              <LogOut class="h-4 w-4" />
+              Se déconnecter
+            </button>
+          </div>
+        </Transition>
+
+        <button
+          @click="toggleUserMenu"
+          class="flex w-full items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-white/[0.04]"
+        >
+          <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-200">
+            <User class="h-3.5 w-3.5 text-muted" />
+          </div>
+          <span v-if="!collapsed && userEmail" class="truncate text-left text-xs font-medium text-zinc-300">{{ userEmail }}</span>
         </button>
       </div>
     </div>
