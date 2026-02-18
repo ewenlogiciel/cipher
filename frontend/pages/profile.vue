@@ -188,7 +188,7 @@ onMounted(fetchProfile)
           <button
             type="submit"
             :disabled="saving"
-            class="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
+            class="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim disabled:opacity-50"
           >
             {{ saving ? 'Enregistrement...' : 'Enregistrer' }}
           </button>

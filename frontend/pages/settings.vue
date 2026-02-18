@@ -126,7 +126,7 @@ async function disableTwoFactor() {
               v-if="!twoFactorEnabled && setupStep === 'idle'"
               :disabled="loading"
               @click="enableTwoFactor"
-              class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
+              class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim disabled:opacity-50"
             >
               Activer
             </button>
@@ -158,7 +158,7 @@ async function disableTwoFactor() {
                 <button
                   :disabled="loading || confirmCode.length < 6"
                   @click="confirmTwoFactor"
-                  class="rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
+                  class="rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim disabled:opacity-50"
                 >
                   Confirmer
                 </button>

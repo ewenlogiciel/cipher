@@ -18,7 +18,7 @@ const { user, logout } = useAuth()
 const userEmail = computed(() => user.value?.email ?? '')
 
 const navigation = [
-  { name: 'Accueil', icon: Home, path: '/' },
+  { name: 'Dashboard', icon: Home, path: '/' },
   { name: 'Coffres', icon: Vault, path: '/vaults' },
   { name: 'Activité', icon: Activity, path: '/activity' },
   { name: 'Paramètres', icon: Settings, path: '/settings' },
