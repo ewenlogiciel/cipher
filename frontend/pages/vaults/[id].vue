@@ -259,7 +259,7 @@ onMounted(fetchAll)
         <div class="flex justify-end">
           <button
             @click="secretError = ''; newSecretName = ''; newSecretValue = ''; newSecretDescription = ''; showSecretModal = true"
-            class="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dim"
+            class="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim"
           >
             <Plus class="h-4 w-4" />
             Nouveau secret
@@ -321,7 +321,7 @@ onMounted(fetchAll)
         <div v-if="isOwner" class="flex justify-end">
           <button
             @click="memberError = ''; newMemberEmail = ''; newMemberRole = 'member'; showMemberModal = true"
-            class="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dim"
+            class="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim"
           >
             <UserPlus class="h-4 w-4" />
             Ajouter un membre
@@ -440,7 +440,7 @@ onMounted(fetchAll)
               <button
                 type="submit"
                 :disabled="creatingSecret || !newSecretName.trim() || !newSecretValue"
-                class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
+                class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim disabled:opacity-50"
               >
                 {{ creatingSecret ? 'Création...' : 'Créer' }}
               </button>
@@ -495,7 +495,7 @@ onMounted(fetchAll)
               <button
                 type="submit"
                 :disabled="addingMember || !newMemberEmail.trim()"
-                class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
+                class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim disabled:opacity-50"
               >
                 {{ addingMember ? 'Ajout...' : 'Ajouter' }}
               </button>

@@ -98,7 +98,7 @@ onMounted(fetchVaults)
       </div>
       <button
         @click="openModal"
-        class="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dim"
+        class="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim"
       >
         <Plus class="h-4 w-4" />
         Nouveau coffre
@@ -230,7 +230,7 @@ onMounted(fetchVaults)
               <button
                 type="submit"
                 :disabled="creating || !newName.trim()"
-                class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
+                class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim disabled:opacity-50"
               >
                 {{ creating ? 'Création...' : 'Créer' }}
               </button>

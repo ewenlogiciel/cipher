@@ -114,8 +114,8 @@ onMounted(fetchDashboard)
         </div>
         <div class="rounded-xl border border-white/[0.06] bg-surface-50 p-5">
           <div class="flex items-center gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/10">
-              <Eye class="h-5 w-5 text-violet-400" />
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/[0.06]">
+              <Eye class="h-5 w-5 text-zinc-400" />
             </div>
             <div>
               <p class="text-2xl font-semibold text-zinc-100">{{ data.stats.accessCount }}</p>

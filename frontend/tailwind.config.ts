@@ -13,8 +13,8 @@ export default {
           300: '#3f3f46',
         },
         accent: {
-          DEFAULT: '#a78bfa',
-          dim: '#7c3aed',
+          DEFAULT: '#ffffff',
+          dim: '#e4e4e7',
         },
         muted: '#71717a',
       },

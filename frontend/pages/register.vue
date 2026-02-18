@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Shield } from 'lucide-vue-next'
+import { Shield, Eye, EyeOff } from 'lucide-vue-next'
 
 definePageMeta({ layout: false })
 
@@ -8,6 +8,7 @@ const { setToken } = useAuth()
 
 const email = ref('')
 const password = ref('')
+const showPassword = ref(false)
 const errors = ref<Record<string, string[]>>({})
 const loading = ref(false)
 
@@ -49,10 +50,7 @@ const firstError = computed(() => {
   <div class="flex min-h-screen items-center justify-center bg-surface px-4">
     <div class="w-full max-w-sm">
       <div class="mb-8 flex items-center justify-center gap-3">
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10">
-          <Shield class="h-5 w-5 text-accent" />
-        </div>
-        <span class="text-xl font-semibold tracking-tight text-zinc-100">Cipher</span>
+        <span class="text-4xl font-bold tracking-tight text-zinc-100">cipher</span>
       </div>
 
       <form @submit.prevent="handleRegister" class="space-y-4">
@@ -75,20 +73,30 @@ const firstError = computed(() => {
 
         <div>
           <label class="mb-1.5 block text-xs font-medium text-muted">Mot de passe</label>
-          <input
-            v-model="password"
-            type="password"
-            required
-            minlength="8"
-            class="w-full rounded-lg border border-white/[0.06] bg-surface-50 px-3 py-2.5 text-sm text-zinc-200 placeholder-muted outline-none transition-colors focus:border-accent/40 focus:ring-1 focus:ring-accent/20"
-            placeholder="Min. 8 caractères"
-          />
+          <div class="relative">
+            <input
+              v-model="password"
+              :type="showPassword ? 'text' : 'password'"
+              required
+              minlength="8"
+              class="w-full rounded-lg border border-white/[0.06] bg-surface-50 px-3 py-2.5 pr-10 text-sm text-zinc-200 placeholder-muted outline-none transition-colors focus:border-accent/40 focus:ring-1 focus:ring-accent/20"
+              placeholder="Min. 8 caractères"
+            />
+            <button
+              type="button"
+              @click="showPassword = !showPassword"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-muted transition-colors hover:text-zinc-300"
+            >
+              <Eye v-if="showPassword" class="h-4 w-4" />
+              <EyeOff v-else class="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         <button
           type="submit"
           :disabled="loading"
-          class="w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
+          class="w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-zinc-950 transition-colors hover:bg-accent-dim disabled:opacity-50"
         >
           {{ loading ? 'Création...' : 'Créer un compte' }}
         </button>
